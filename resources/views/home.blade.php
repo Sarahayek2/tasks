@@ -30,7 +30,7 @@
                         </tr>
                         @foreach ($tasks as $task)
                         <tr>
-                            <td>{{ $task->task }}</td>
+                            <td><a href="{{ route('task.single', $task->id) }}">{{ $task->task }}</a></td>
                             <td>
                                 <form action="{{ route('delete_task', $task->id) }}" method="POST">
                                     @csrf
