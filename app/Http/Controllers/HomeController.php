@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubTask;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,7 @@ class HomeController extends Controller
 
     public function delete_task ($id)
     {
+        SubTask::where('task_id', $id)->delete();
         Task::destroy($id);
 
         return redirect()-> route('home');

@@ -82,7 +82,9 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = SubTask::find($id);
+
+        return view('tasks.edit_task', compact('task'));
     }
 
     /**
@@ -94,7 +96,27 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'expire' => 'required',
+        ]);
+
+        $task = SubTask::find($id);
+
+        $img_name = $task->image;
+
+        if($request->hasFile('image')) {
+            $img_name = rand().time().$request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('uploads'), $img_name);
+        }
+
+        $task->update([
+            'name' => $request->name,
+            'image' => $img_name,
+            'expire' => $request->expire,
+        ]);
+
+        return redirect()->route('task.single', $task->task_id);
     }
 
     /**

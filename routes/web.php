@@ -30,4 +30,6 @@ Route::get('/task/{id}/create', [TaskController::class, 'create'])->name('task.c
 Route::post('/task/{id}/store', [TaskController::class, 'store'])->name('task.store');
 
 Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('task.edit');
+Route::put('/task/{id}/update', [TaskController::class, 'update'])->name('task.update');
+
 Route::delete('/task/{id}/destroy', [TaskController::class, 'destroy'])->name('task.destroy');
